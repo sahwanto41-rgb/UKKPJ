@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>CAT UKPJ Pengawas Sekolah Ahli Muda 2026</title>
+<style>
+:root{--bg:#f8fafc;--card:#fff;--tx:#0f172a;--mu:#64748b;--bd:#e2e8f0;--pr:#0f2547;--ac:#f59e0b;--ok:#16a34a;--er:#dc2626;--soft:#eef2f7;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0b1220;--card:#131c2e;--tx:#e8edf5;--mu:#94a3b8;--bd:#25324a;--pr:#7aa2e8;--soft:#1a2740;color-scheme:dark}}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.55 "Plus Jakarta Sans",system-ui,-apple-system,"Segoe UI",sans-serif}
+.w{max-width:1100px;margin:0 auto;padding:16px}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:18px;margin-bottom:14px}
+h1{font-size:22px;margin:0 0 6px}h2{font-size:17px;margin:0 0 10px}
+.mu{color:var(--mu);font-size:13px}
+input,select,textarea,button{font:inherit;color:inherit}
+input,select,textarea{width:100%;padding:10px 12px;border:1px solid var(--bd);border-radius:10px;background:var(--bg);margin:4px 0 10px}
+button{cursor:pointer;border:1px solid var(--bd);background:var(--card);padding:9px 14px;border-radius:10px}
+button.p{background:var(--pr);color:#fff;border-color:var(--pr)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) button.p{color:#0b1220}}
+button.d{color:var(--er)}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}.sp{justify-content:space-between}
+.hd{background:var(--pr);color:#fff;padding:12px 16px;position:sticky;top:0;z-index:5;padding-top:calc(12px + env(safe-area-inset-top,0px))}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .hd{color:#0b1220}}
+.tm{font:700 18px "JetBrains Mono",monospace}
+.opt{display:block;width:100%;text-align:left;margin:8px 0;padding:12px;border-radius:10px;border:1px solid var(--bd);background:var(--bg)}
+.opt.s{border-color:var(--pr);background:var(--soft);font-weight:600}
+.opt.ok{border-color:var(--ok)}.opt.bad{border-color:var(--er)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(40px,1fr));gap:6px}
+.grid button{padding:8px 0;text-align:center}
+.grid .a{background:var(--pr);color:#fff}.grid .f{outline:2px solid var(--ac)}.grid .c{box-shadow:0 0 0 2px var(--tx)}
+.bar{height:10px;border-radius:6px;background:var(--soft);overflow:hidden}.bar i{display:block;height:100%;background:var(--pr)}
+table{width:100%;border-collapse:collapse;font-size:13px}th,td{padding:7px;border-bottom:1px solid var(--bd);text-align:left}
+.sc{overflow-x:auto}
+.big{font-size:44px;font-weight:800}
+.tag{display:inline-block;padding:2px 8px;border-radius:99px;background:var(--soft);font-size:12px}
+.lay{display:grid;grid-template-columns:1fr 280px;gap:16px;align-items:start}
+.lay>div:last-child{position:sticky;top:84px}
+.hd>div:first-child{min-width:0}
+@media(min-width:1024px){body{font-size:16px}.card{padding:22px}.opt{padding:14px}}
+@media(pointer:coarse){button{min-height:44px}}
+@media(max-width:720px){.lay{grid-template-columns:1fr}.lay>div:last-child{position:static}.w{padding:12px 12px 96px}.card{padding:14px;border-radius:12px}h1{font-size:19px}.big{font-size:36px}.tm{font-size:16px}.hd{padding-left:12px;padding-right:12px}input,select,textarea{font-size:16px}.grid{grid-template-columns:repeat(auto-fill,minmax(44px,1fr))}.sc table{min-width:560px}.nv{position:fixed;left:0;right:0;bottom:0;margin:0!important;background:var(--card);border-top:1px solid var(--bd);padding:10px 12px calc(10px + env(safe-area-inset-bottom,0px));z-index:6;flex-wrap:nowrap;gap:6px}.nv button{flex:1;font-size:13px;padding:9px 6px}}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js"></script>
+<script>
+const $=s=>document.querySelector(s);
+const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const load=(k,d)=>{try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}};
+const save=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}};
+const G=['Teknis','Manajerial','Sosial Kultural'];
+const SEED=[
+['Teknis','Supervisi akademik','Seorang pengawas menemukan guru binaan menyusun RPP salin-tempel tanpa menyesuaikan karakter peserta didik.',['Menegur guru di depan rekan sejawat','Berdiskusi dengan guru, memberi umpan balik berbasis data observasi, lalu menyepakati rencana perbaikan','Meminta kepala sekolah mengganti guru tersebut','Membiarkan karena RPP hanya administrasi'],'B','Supervisi akademik bersifat pembinaan: umpan balik berbasis data dan tindak lanjut bersama.'],
+['Teknis','Supervisi akademik','Hasil observasi kelas menunjukkan guru dominan ceramah dan siswa pasif.',['Memberi contoh model pembelajaran aktif, lalu melakukan pendampingan dan observasi ulang','Mengirim surat peringatan','Mengganti jadwal mengajar guru','Menunggu guru menyadari sendiri'],'A','Pembinaan berkelanjutan dengan pendampingan lebih efektif daripada sanksi.'],
+['Teknis','Evaluasi pendidikan','Nilai asesmen sekolah binaan turun dua tahun berturut-turut.',['Menyalahkan kualitas siswa baru','Menganalisis data asesmen untuk menemukan akar masalah, lalu menyusun rencana peningkatan bersama sekolah','Menurunkan kriteria ketuntasan','Meminta guru menambah soal latihan saja'],'B','Perbaikan mutu harus berbasis data dan akar masalah.'],
+['Teknis','Pembimbingan guru','Guru baru kesulitan mengelola kelas.',['Menugaskan guru senior sebagai mentor dan memantau perkembangan secara berkala','Menyuruh belajar mandiri tanpa pendampingan','Memindahkan ke kelas lain','Mengabaikan sampai evaluasi akhir tahun'],'A','Mentoring terstruktur mempercepat penguasaan kompetensi guru baru.'],
+['Teknis','Pemantauan standar nasional','Sekolah binaan belum memenuhi standar sarana prasarana.',['Melaporkan kekurangan, memberi rekomendasi prioritas, dan mendampingi penyusunan rencana pemenuhan','Menutup sekolah','Mengabaikan temuan','Menunggu dinas bertindak'],'A','Pemantauan harus diikuti rekomendasi dan pendampingan tindak lanjut.'],
+['Teknis','Penelitian dan pengembangan','Pengawas ingin memperbaiki praktik pembelajaran di wilayah binaan secara sistematis.',['Menyalin program sekolah lain','Melakukan penelitian tindakan, menganalisis hasil, lalu mendiseminasikan temuan','Menunggu instruksi atasan','Menyebarkan angket tanpa analisis'],'B','Pengembangan berbasis penelitian menghasilkan perbaikan yang terukur.'],
+['Manajerial','Perencanaan program','Anda menyusun program kepengawasan tahunan untuk 8 sekolah binaan dengan sumber daya terbatas.',['Menyamakan semua program di tiap sekolah','Memetakan kebutuhan tiap sekolah dari data, menetapkan prioritas, dan menjadwalkan sesuai kapasitas','Menunggu permintaan sekolah','Fokus pada sekolah favorit saja'],'B','Program yang baik berbasis pemetaan kebutuhan dan prioritas.'],
+['Manajerial','Pelaporan','Laporan kepengawasan harus diserahkan, namun data dua sekolah belum lengkap.',['Mengarang data agar tepat waktu','Menghubungi sekolah, melengkapi data yang valid, dan mencatat keterbatasan jika masih ada kekurangan','Menunda laporan tanpa kabar','Menghilangkan dua sekolah itu'],'B','Integritas data lebih penting; keterbatasan dicatat secara jujur.'],
+['Manajerial','Koordinasi','Terjadi tumpang tindih jadwal pembinaan dengan kegiatan dinas.',['Membatalkan pembinaan sepihak','Berkoordinasi dengan dinas dan sekolah untuk menjadwal ulang dan mengomunikasikan perubahan','Tetap hadir di dua tempat','Menyuruh sekolah menyesuaikan sendiri'],'B','Koordinasi dan komunikasi jelas mencegah gangguan layanan.'],
+['Manajerial','Pengambilan keputusan','Dua kepala sekolah binaan meminta prioritas pendampingan pada waktu yang sama.',['Memilih yang paling akrab','Menilai urgensi dan dampak berdasarkan data, lalu menjelaskan keputusan kepada keduanya','Mengundi','Menolak keduanya'],'B','Keputusan transparan dan berbasis kriteria objektif.'],
+['Sosial Kultural','Komunikasi lintas budaya','Guru di sekolah binaan menolak program karena menganggap tidak sesuai budaya setempat.',['Memaksakan program apa adanya','Mendengar keberatan, memahami konteks budaya, dan menyesuaikan pendekatan tanpa mengurangi tujuan','Menghentikan program','Mengabaikan keberatan'],'B','Sensitivitas budaya dan dialog menjaga kepercayaan.'],
+['Sosial Kultural','Kerukunan','Muncul ketegangan antarguru karena perbedaan keyakinan di sekolah binaan.',['Memfasilitasi dialog, menegaskan nilai toleransi dan aturan sekolah','Berpihak pada kelompok mayoritas','Menghindari masalah','Menyebarkan isu ke grup pesan'],'A','Pengawas menjadi fasilitator yang menjunjung kebinekaan.']
+].map((q,i)=>({id:'q'+(i+1),g:q[0],sub:q[1],text:q[2],opts:q[3],ans:q[4],exp:q[5]}));
+
+let db=load('cat_db',null)||{q:SEED,res:[],set:{dur:120,n:50,wT:70,wM:25,wS:5,exp:true,shuf:true},pass:''};
+let S=load('cat_sess',null); let view=S?'exam':'home'; let adm=false,tab='hasil',last=null,timer=null;
+const persist=()=>save('cat_db',db), sess=()=>save('cat_sess',S);
+const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+const pks=()=>[...new Set(db.q.map(q=>q.pk).filter(Boolean))].sort();
+const fmt=s=>{s=Math.max(0,s);return [s/3600|0,(s%3600)/60|0,s%60].map(x=>String(x).padStart(2,'0')).join(':')};
+const cat=s=>s>=85?'Sangat Baik':s>=70?'Baik':s>=55?'Cukup':'Perlu Peningkatan';
+
+function render(){clearInterval(timer);const a=$('#app');
+ ({home:home,exam:exam,result:result,admin:admin}[view])(a);}
+
+function home(a){a.innerHTML=`<div class="w"><div class="card"><span class="tag">Simulasi, bukan aplikasi resmi pemerintah</span>
+<h1>CAT UKPJ Pengawas Sekolah Ahli Muda 2026</h1>
+<p class="mu">Simulasi Uji Kompetensi Perpindahan Jabatan Fungsional Guru ke Pengawas Sekolah Ahli Muda berbasis Computer Assisted Test. Butir soal berupa latihan Situational Judgment Test (SJT). Bobot: Teknis ${db.set.wT}%, Manajerial ${db.set.wM}%, Sosial Kultural ${db.set.wS}%.</p>
+<label>Nama lengkap<input id="n"></label><label>Nomor peserta<input id="no"></label><label>Instansi / sekolah<input id="in"></label>
+<label>Paket soal<select id="pk"><option value="">Semua paket (acak)</option>${pks().map(p=>`<option>${esc(p)}</option>`).join('')}</select></label><label>Tingkat kesulitan<select id="lv"><option value="">Semua tingkat</option><option>Mudah</option><option>Sedang</option><option>Sulit</option></select></label>
+<div class="row"><button class="p" onclick="start()">Mulai Ujian</button><button onclick="view='admin';render()">Login Admin</button></div>
+<p class="mu">Durasi penuh ${db.set.dur} menit untuk ${db.set.n} soal; jika soal lebih sedikit, durasi disesuaikan proporsional. Bank soal: ${db.q.length} soal. Data tersimpan di peramban Anda.</p></div></div>`}
+
+function start(){const n=$('#n').value.trim(),no=$('#no').value.trim(),i=$('#in').value.trim();
+ if(n.length<2||no.length<3)return alert('Isi nama (min. 2 huruf) dan nomor peserta (min. 3 karakter).');
+ const pool=db.q.filter(q=>(!$('#pk').value||q.pk===$('#pk').value)&&(!$('#lv').value||q.lv===$('#lv').value));
+ if(!pool.length)return alert('Tidak ada soal untuk pilihan paket dan tingkat tersebut.');
+ let ids=pool.map(q=>q.id); if(db.set.shuf)ids=shuffle(ids); ids=ids.slice(0,db.set.n);
+ S={p:{n,no,i},ids,ans:{},fl:{},idx:0,t0:Date.now(),end:Date.now()+Math.max(1,Math.round(db.set.dur*Math.min(1,ids.length/(db.set.n||50))))*60000};sess();view='exam';render()}
+
+function exam(a){const Q=id=>db.q.find(q=>q.id===id);const id=S.ids[S.idx],q=Q(id);
+ if(!q){S=null;sess();view='home';return render()}
+ const L='ABCD';
+ a.innerHTML=`<div class="hd row sp"><div><b>${esc(S.p.n)}</b><div style="font-size:12px;opacity:.8">${esc(S.p.no)}</div></div><div class="tm" id="tm"></div></div>
+<div class="w lay"><div><div class="card"><div class="row sp"><span class="tag">Soal ${S.idx+1} / ${S.ids.length}</span><span class="tag">${esc(q.g)} · ${esc(q.sub)}</span></div>
+<p style="margin:14px 0">${esc(q.text)}</p>${q.opts.map((o,i)=>`<button class="opt ${S.ans[id]===L[i]?'s':''}" onclick="pick('${L[i]}')"><b>${L[i]}.</b> ${esc(o)}</button>`).join('')}
+<div class="row sp nv" style="margin-top:12px"><button onclick="go(-1)">Sebelumnya</button><button onclick="flag()">${S.fl[id]?'Hapus tanda ragu':'Tandai ragu-ragu'}</button>
+${S.idx<S.ids.length-1?'<button class="p" onclick="go(1)">Berikutnya</button>':'<button class="p" onclick="finish(true)">Selesai</button>'}</div></div></div>
+<div class="card"><h2>Navigasi</h2><div class="grid">${S.ids.map((x,i)=>`<button class="${S.ans[x]?'a':''} ${S.fl[x]?'f':''} ${i===S.idx?'c':''}" onclick="S.idx=${i};sess();render()">${i+1}</button>`).join('')}</div>
+<p class="mu">Terjawab ${Object.keys(S.ans).length} dari ${S.ids.length}</p><button class="p" style="width:100%" onclick="finish(true)">Kumpulkan Jawaban</button></div></div>`;
+ const tick=()=>{const r=Math.round((S.end-Date.now())/1000);const t=$('#tm');if(t)t.textContent=fmt(r);if(r<=0)finish(false)};tick();timer=setInterval(tick,1000)}
+
+const pick=o=>{S.ans[S.ids[S.idx]]=o;sess();render()};
+const flag=()=>{const id=S.ids[S.idx];S.fl[id]=!S.fl[id];sess();render()};
+const go=d=>{S.idx=Math.min(S.ids.length-1,Math.max(0,S.idx+d));sess();render()};
+
+function finish(ask){const un=S.ids.length-Object.keys(S.ans).length;
+ if(ask&&!confirm(un?`Masih ada ${un} soal belum dijawab. Kumpulkan sekarang?`:'Kumpulkan jawaban sekarang?'))return;
+ const st={};G.forEach(g=>st[g]={t:0,c:0});let c=0,w=0,u=0;
+ S.ids.forEach(id=>{const q=db.q.find(x=>x.id===id);if(!q)return;const s=st[q.g];s.t++;const a=S.ans[id];if(!a)u++;else if(a===q.ans){c++;s.c++}else w++});
+ const W={Teknis:db.set.wT,Manajerial:db.set.wM,'Sosial Kultural':db.set.wS};let tw=0,sum=0;const sc={};
+ G.forEach(g=>{sc[g]=st[g].t?Math.round(st[g].c/st[g].t*1000)/10:null;if(st[g].t){tw+=W[g];sum+=W[g]*st[g].c/st[g].t}});
+ const fin=tw?Math.round(sum/tw*1000)/10:0;
+ last={id:'r'+Date.now(),p:S.p,ids:S.ids,ans:S.ans,total:S.ids.length,c,w,u,sc,fin,cat:cat(fin),dur:Math.round((Date.now()-S.t0)/1000),at:new Date().toISOString()};
+ db.res.push(last);persist();S=null;sess();view='result';render()}
+
+function result(a){const r=last;if(!r){view='home';return render()}const L='ABCD';
+ a.innerHTML=`<div class="w"><div class="card" style="text-align:center"><div class="mu">${esc(r.p.n)} · ${esc(r.p.no)}</div><div class="big">${r.fin}</div><div><b>${r.cat}</b></div>
+<p class="mu">Benar ${r.c} · Salah ${r.w} · Kosong ${r.u} · Waktu ${fmt(r.dur)}</p></div>
+<div class="card"><h2>Skor per kompetensi</h2>${G.map(g=>`<div class="row sp"><span>${g}</span><b>${r.sc[g]==null?'-':r.sc[g]+'%'}</b></div><div class="bar"><i style="width:${r.sc[g]||0}%"></i></div><br>`).join('')}</div>
+<div class="card"><h2>Pembahasan</h2>${r.ids.map((id,n)=>{const q=db.q.find(x=>x.id===id);if(!q)return'';const a2=r.ans[id];return `<div style="margin-bottom:16px"><b>${n+1}. ${esc(q.text)}</b><span class="tag">${esc(q.g)}</span>
+${q.opts.map((o,i)=>`<div class="opt ${L[i]===q.ans?'ok':a2===L[i]?'bad':''}" style="margin:4px 0">${L[i]}. ${esc(o)}${L[i]===a2?' (jawaban Anda)':''}</div>`).join('')}${db.set.exp?`<p class="mu">${esc(q.exp)}</p>`:''}</div>`}).join('')}</div>
+<button class="p" onclick="view='home';render()">Kembali ke Beranda</button> <button onclick="print()">Cetak / PDF</button></div>`}
+
+function admin(a){
+ if(!adm){a.innerHTML=`<div class="w"><div class="card"><h2>Login Admin</h2><p class="mu">${db.pass?'Masukkan password administrator.':'Belum ada password. Tetapkan password awal (min. 8 karakter).'}</p><input id="pw" type="password">
+ <div class="row"><button class="p" onclick="alogin()">${db.pass?'Masuk':'Tetapkan & Masuk'}</button><button onclick="view='home';render()">Kembali</button></div></div></div>`;return}
+ const tabs=['hasil','soal','pengaturan','cadangan'];let body='';
+ if(tab==='hasil')body=`<div class="sc"><table><tr><th>Peserta</th><th>No</th><th>Skor</th><th>Kategori</th><th>Waktu</th></tr>${db.res.map(r=>`<tr><td>${esc(r.p.n)}</td><td>${esc(r.p.no)}</td><td>${r.fin}</td><td>${r.cat}</td><td>${new Date(r.at).toLocaleString('id-ID')}</td></tr>`).join('')||'<tr><td colspan=5 class="mu">Belum ada hasil.</td></tr>'}</table></div><br><button onclick="csv()">Ekspor CSV</button> <button class="d" onclick="if(confirm('Hapus semua hasil?')){db.res=[];persist();render()}">Hapus hasil</button>`;
+ if(tab==='soal')body=`<h2>Impor dari Word (.docx)</h2><p class="mu">Format yang dibaca: butir "Soal N." dengan opsi A sampai D, tabel Kunci Jawaban (No, Kunci, Kelompok, Kompetensi, Tingkat), dan bagian Pembahasan, seperti Paket A.</p><select id="im"><option value="add">Tambahkan ke bank soal</option><option value="rep">Ganti seluruh bank soal</option></select><input type="file" accept=".docx" onchange="impw(this.files[0])"><div id="imr" class="mu"></div><hr style="border:0;border-top:1px solid var(--bd);margin:18px 0"><h2>Tambah soal</h2><select id="qg">${G.map(g=>`<option>${g}</option>`).join('')}</select><input id="qs" placeholder="Subkompetensi"><input id="qp" placeholder="Paket (mis. Paket A, opsional)"><select id="ql"><option value="">Tingkat kesulitan (opsional)</option><option>Mudah</option><option>Sedang</option><option>Sulit</option></select><textarea id="qt" rows="3" placeholder="Narasi kasus dan pertanyaan"></textarea>
+ ${'ABCD'.split('').map(l=>`<input id="o${l}" placeholder="Opsi ${l}">`).join('')}<select id="qa"><option>A</option><option>B</option><option>C</option><option>D</option></select><textarea id="qe" rows="2" placeholder="Pembahasan"></textarea><button class="p" onclick="addq()">Simpan soal</button>
+ <h2 style="margin-top:20px">Bank soal (${db.q.length})</h2><div class="sc"><table>${db.q.map(q=>`<tr><td>${esc(q.g)}</td><td>${esc(q.pk||'-')} · ${esc(q.lv||'-')}</td><td>${esc(q.text.slice(0,60))}…</td><td>${q.ans}</td><td><button class="d" onclick="delq('${q.id}')">Hapus</button></td></tr>`).join('')}</table></div>`;
+ if(tab==='pengaturan'){const s=db.set;body=`<label>Durasi (menit)<input id="s1" type="number" value="${s.dur}"></label><label>Jumlah soal per ujian<input id="s2" type="number" value="${s.n}"></label>
+ <label>Bobot Teknis (%)<input id="s3" type="number" value="${s.wT}"></label><label>Bobot Manajerial (%)<input id="s4" type="number" value="${s.wM}"></label><label>Bobot Sosial Kultural (%)<input id="s5" type="number" value="${s.wS}"></label>
+ <label><input type="checkbox" id="s6" ${s.exp?'checked':''} style="width:auto"> Tampilkan pembahasan</label><label><input type="checkbox" id="s7" ${s.shuf?'checked':''} style="width:auto"> Acak soal</label>
+ <button class="p" onclick="sets()">Simpan</button> <button onclick="if(confirm('Ganti password admin?')){db.pass='';persist();adm=false;render()}">Reset password</button>`}
+ if(tab==='cadangan')body=`<p class="mu">Unduh cadangan JSON seluruh data (soal, hasil, pengaturan) atau pulihkan dari berkas cadangan.</p><button class="p" onclick="bak()">Unduh cadangan</button><br><br><input type="file" accept=".json" onchange="rest(this.files[0])">`;
+ a.innerHTML=`<div class="w"><div class="row sp"><h1>Konsol Admin</h1><div class="row"><button onclick="adm=false;view='home';render()">Keluar</button></div></div>
+ <div class="row" style="margin-bottom:12px">${tabs.map(t=>`<button class="${t===tab?'p':''}" onclick="tab='${t}';render()">${t[0].toUpperCase()+t.slice(1)}</button>`).join('')}</div><div class="card">${body}</div></div>`}
+
+function alogin(){const p=$('#pw').value;if(!db.pass){if(p.length<8)return alert('Minimal 8 karakter.');db.pass=btoa(unescape(encodeURIComponent(p)));persist();adm=true}
+ else if(btoa(unescape(encodeURIComponent(p)))===db.pass)adm=true;else return alert('Password salah.');render()}
+const h2t=h=>h.replace(/<br\s*\/?>/g,'\n').replace(/<\/(p|td|th|tr|li|h\d)>/g,'\n').replace(/<[^>]+>/g,'').replace(/&nbsp;/g,' ').replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&quot;/g,'"').replace(/&#39;/g,"'").replace(/&amp;/g,'&');
+function parseDocx(text){
+ const L=text.split(/\r?\n/).map(s=>s.trim()).filter(Boolean);
+ const idx=re=>L.findIndex(l=>re.test(l));
+ const kS=idx(/^\d+\.\s*Kunci Jawaban/i),eS=idx(/^\d+\.\s*Pembahasan/i),lS=idx(/^\d+\.\s*Lembar Jawaban/i);
+ const qE=[lS,kS].filter(x=>x>0).sort((a,b)=>a-b)[0]??L.length;
+ const qs=[];let cur=null,lo=null,m;
+ for(const l of L.slice(0,qE)){
+  if(m=l.match(/^Soal\s+(\d+)\.\s*(.*)/)){cur={n:+m[1],text:m[2],opts:{}};lo=null;qs.push(cur)}
+  else if(cur&&(m=l.match(/^([A-D])\.\s*(.*)/))){cur.opts[m[1]]=m[2];lo=m[1]}
+  else if(cur){if(lo)cur.opts[lo]+=' '+l;else cur.text+=' '+l}
+ }
+ const key={};
+ if(kS>=0)for(let i=kS;i<(eS>kS?eS:L.length);i++)if(/^\d+$/.test(L[i])&&/^[A-D]$/.test(L[i+1]||''))key[+L[i]]={a:L[i+1],g:L[i+2]||'',c:L[i+3]||'',lv:L[i+4]||''};
+ const ex={};let en=null;
+ if(eS>=0)for(const l of L.slice(eS+1)){if(m=l.match(/^Soal\s+(\d+)\s*\(([A-D])\)\.\s*(.*)/)){en=+m[1];ex[en]=m[3]}else if(en&&!/^Catatan:/.test(l))ex[en]+=' '+l}
+ const grp=g=>/manajer/i.test(g)?'Manajerial':/sosial/i.test(g)?'Sosial Kultural':'Teknis';
+ const items=[],warn=[];
+ qs.forEach(q=>{const k=key[q.n];
+  if(!['A','B','C','D'].every(x=>q.opts[x]))return warn.push('Soal '+q.n+': opsi A-D tidak lengkap');
+  if(!k)return warn.push('Soal '+q.n+': kunci jawaban tidak ditemukan');
+  items.push({id:'w'+Date.now()+'_'+q.n,g:grp(k.g),sub:k.c||'-',text:q.text,opts:['A','B','C','D'].map(x=>q.opts[x]),ans:k.a,exp:ex[q.n]||'-',lv:k.lv||''})});
+ return{items,warn};
+}
+async function impw(f){const o=$('#imr');if(!f)return;
+ if(!window.mammoth){o.textContent='Pustaka pembaca Word gagal dimuat. Periksa koneksi internet.';return}
+ try{const r=await mammoth.convertToHtml({arrayBuffer:await f.arrayBuffer()});const {items,warn}=parseDocx(h2t(r.value));
+  if(!items.length){o.textContent='Tidak ada soal yang terbaca. '+warn.join('; ');return}
+  const rep=$('#im').value==='rep';
+  const mm=f.name.match(/Paket[ _]*([A-F])/i);const pk=(prompt('Nama paket untuk soal ini (mis. Paket A):',mm?'Paket '+mm[1].toUpperCase():'')||'').trim();items.forEach(i=>i.pk=pk);
+  if(!confirm(items.length+' soal terbaca ('+G.map(g=>g+' '+items.filter(i=>i.g===g).length).join(', ')+'). '+(rep?'Bank soal lama akan DIGANTI.':'Soal ditambahkan ke bank soal.')+(warn.length?' Dilewati: '+warn.length+' soal.':'')+' Lanjutkan?')){o.textContent='Dibatalkan.';return}
+  db.q=rep?items:db.q.concat(items);persist();render();alert(items.length+' soal berhasil diimpor.'+(warn.length?'\n'+warn.join('\n'):''));
+ }catch(e){o.textContent='Gagal membaca berkas Word. Pastikan formatnya .docx.'}}
+function addq(){const g=$('#qg').value,t=$('#qt').value.trim(),o=['A','B','C','D'].map(l=>$('#o'+l).value.trim());
+ if(t.length<10||o.some(x=>x.length<2))return alert('Lengkapi narasi dan keempat opsi.');
+ db.q.push({id:'q'+Date.now(),g,sub:$('#qs').value.trim()||'-',text:t,opts:o,ans:$('#qa').value,exp:$('#qe').value.trim()||'-',pk:$('#qp').value.trim(),lv:$('#ql').value});persist();render()}
+function delq(id){if(confirm('Hapus soal ini?')){db.q=db.q.filter(q=>q.id!==id);persist();render()}}
+function sets(){const n=i=>Math.max(0,+$('#s'+i).value||0);db.set={dur:n(1)||120,n:n(2)||50,wT:n(3),wM:n(4),wS:n(5),exp:$('#s6').checked,shuf:$('#s7').checked};persist();alert('Tersimpan.')}
+function dl(name,txt,type){const u=URL.createObjectURL(new Blob([txt],{type}));const a=document.createElement('a');a.href=u;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(u),1000)}
+function csv(){const rows=[['Nama','Nomor','Instansi','Benar','Salah','Kosong','Teknis','Manajerial','Sosial Kultural','Skor','Kategori','Waktu']].concat(db.res.map(r=>[r.p.n,r.p.no,r.p.i,r.c,r.w,r.u,r.sc.Teknis,r.sc.Manajerial,r.sc['Sosial Kultural'],r.fin,r.cat,r.at]));
+ dl('hasil-ujian.csv',rows.map(r=>r.map(v=>'"'+String(v??'').replace(/"/g,'""')+'"').join(',')).join('\n'),'text/csv')}
+function bak(){dl('cadangan-cat.json',JSON.stringify(db),'application/json')}
+function rest(f){if(!f)return;const r=new FileReader();r.onload=()=>{try{const d=JSON.parse(r.result);if(!Array.isArray(d.q)||!d.set)throw 0;db=d;persist();alert('Data dipulihkan.');render()}catch(e){alert('Berkas cadangan tidak valid.')}};r.readAsText(f)}
+render();
+</script>
+</body>
+</html>
