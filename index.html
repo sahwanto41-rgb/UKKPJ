@@ -148,25 +148,41 @@ function alogin(){const p=$('#pw').value;if(!db.pass){if(p.length<8)return alert
 const h2t=h=>h.replace(/<br\s*\/?>/g,'\n').replace(/<\/(p|td|th|tr|li|h\d)>/g,'\n').replace(/<[^>]+>/g,'').replace(/&nbsp;/g,' ').replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&quot;/g,'"').replace(/&#39;/g,"'").replace(/&amp;/g,'&');
 function parseDocx(text){
  const L=text.split(/\r?\n/).map(s=>s.trim()).filter(Boolean);
- const idx=re=>L.findIndex(l=>re.test(l));
- const kS=idx(/^\d+\.\s*Kunci Jawaban/i),eS=idx(/^\d+\.\s*Pembahasan/i),lS=idx(/^\d+\.\s*Lembar Jawaban/i);
+ const idx=(re,from=0)=>{for(let i=from;i<L.length;i++)if(re.test(L[i]))return i;return -1};
+ const kS=idx(/^(\d+\.\s*)?Kunci Jawaban/i),eS=idx(/^(\d+\.\s*)?Pembahasan/i),lS=idx(/^(\d+\.\s*)?Lembar Jawaban/i),kiS=idx(/^(\d+\.\s*)?Kisi[- ]?Kisi/i);
  const qE=[lS,kS].filter(x=>x>0).sort((a,b)=>a-b)[0]??L.length;
  const qs=[];let cur=null,lo=null,m;
  for(const l of L.slice(0,qE)){
-  if(m=l.match(/^Soal\s+(\d+)\.\s*(.*)/)){cur={n:+m[1],text:m[2],opts:{}};lo=null;qs.push(cur)}
-  else if(cur&&(m=l.match(/^([A-D])\.\s*(.*)/))){cur.opts[m[1]]=m[2];lo=m[1]}
+  if((m=l.match(/^(?:Soal\s+)?(\d+)[.)]\s*(.*)/))&&+m[1]===qs.length+1&&(qs.length||!/^[A-D]\.\s/.test(l))){cur={n:+m[1],text:m[2],opts:{}};lo=null;qs.push(cur)}
+  else if(cur&&(m=l.match(/^([A-D])[.)]\s*(.*)/))){cur.opts[m[1]]=m[2];lo=m[1]}
   else if(cur){if(lo)cur.opts[lo]+=' '+l;else cur.text+=' '+l}
  }
  const key={};
- if(kS>=0)for(let i=kS;i<(eS>kS?eS:L.length);i++)if(/^\d+$/.test(L[i])&&/^[A-D]$/.test(L[i+1]||''))key[+L[i]]={a:L[i+1],g:L[i+2]||'',c:L[i+3]||'',lv:L[i+4]||''};
+ if(kS>=0){
+  const end=[eS,idx(/^Catatan/i,kS)].filter(x=>x>kS).sort((a,b)=>a-b)[0]??L.length;
+  let i=kS;while(i<end&&!/^\d+$/.test(L[i]))i++;
+  const hdr=L.slice(kS,i).map(x=>x.toLowerCase());
+  const hasMeta=hdr.some(x=>/kelompok|kompetensi/.test(x));
+  for(;i<end;i++)if(/^\d+$/.test(L[i])&&/^[A-D]$/.test(L[i+1]||'')){
+   if(hasMeta)key[+L[i]]={a:L[i+1],g:L[i+2]||'',c:L[i+3]||'',lv:L[i+4]||''};
+   else key[+L[i]]={a:L[i+1],r:(L[i+2]&&!/^\d+$/.test(L[i+2]))?L[i+2]:''}}
+ }
+ const kisi={};
+ if(kiS>=0){const end=[kS,idx(/^\d+[.)]\s/,kiS)-1].filter(x=>x>kiS).sort((a,b)=>a-b)[0]??L.length;
+  for(let i=kiS;i<end;i++)if(/^\d+$/.test(L[i])&&/^(Teknis|Manajerial|Sosial)/i.test(L[i+1]||'')){
+   let j=i+2,cells=[];while(j<end&&!(/^\d+$/.test(L[j])&&/^(Teknis|Manajerial|Sosial)/i.test(L[j+1]||''))){cells.push(L[j]);j++}
+   const cg=cells.length&&/^C[1-6]$/i.test(cells[cells.length-1])?cells.pop().toUpperCase():'';
+   kisi[+L[i]]={g:L[i+1],c:cells[0]||'',mt:cells[1]||'',cg}}}
  const ex={};let en=null;
  if(eS>=0)for(const l of L.slice(eS+1)){if(m=l.match(/^Soal\s+(\d+)\s*\(([A-D])\)\.\s*(.*)/)){en=+m[1];ex[en]=m[3]}else if(en&&!/^Catatan:/.test(l))ex[en]+=' '+l}
  const grp=g=>/manajer/i.test(g)?'Manajerial':/sosial/i.test(g)?'Sosial Kultural':'Teknis';
+ const lvOf=c=>/^C[12]$/.test(c)?'Mudah':c==='C3'?'Sedang':/^C[456]$/.test(c)?'Sulit':'';
  const items=[],warn=[];
- qs.forEach(q=>{const k=key[q.n];
+ qs.forEach(q=>{const k=key[q.n],ki=kisi[q.n]||{};
   if(!['A','B','C','D'].every(x=>q.opts[x]))return warn.push('Soal '+q.n+': opsi A-D tidak lengkap');
   if(!k)return warn.push('Soal '+q.n+': kunci jawaban tidak ditemukan');
-  items.push({id:'w'+Date.now()+'_'+q.n,g:grp(k.g),sub:k.c||'-',text:q.text,opts:['A','B','C','D'].map(x=>q.opts[x]),ans:k.a,exp:ex[q.n]||'-',lv:k.lv||''})});
+  const g=grp(k.g||ki.g||''),sub=k.c||[ki.c,ki.mt].filter(Boolean).join(' – ')||'-';
+  items.push({id:'w'+Date.now()+'_'+q.n,g,sub,text:q.text,opts:['A','B','C','D'].map(x=>q.opts[x]),ans:k.a,exp:ex[q.n]||k.r||'-',lv:k.lv||lvOf(ki.cg)})});
  return{items,warn};
 }
 async function impw(f){const o=$('#imr');if(!f)return;
