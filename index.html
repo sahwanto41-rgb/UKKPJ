@@ -65,12 +65,28 @@ const SEED=[
 ['Manajerial','Pengambilan keputusan','Dua kepala sekolah binaan meminta prioritas pendampingan pada waktu yang sama.',['Memilih yang paling akrab','Menilai urgensi dan dampak berdasarkan data, lalu menjelaskan keputusan kepada keduanya','Mengundi','Menolak keduanya'],'B','Keputusan transparan dan berbasis kriteria objektif.'],
 ['Sosial Kultural','Komunikasi lintas budaya','Guru di sekolah binaan menolak program karena menganggap tidak sesuai budaya setempat.',['Memaksakan program apa adanya','Mendengar keberatan, memahami konteks budaya, dan menyesuaikan pendekatan tanpa mengurangi tujuan','Menghentikan program','Mengabaikan keberatan'],'B','Sensitivitas budaya dan dialog menjaga kepercayaan.'],
 ['Sosial Kultural','Kerukunan','Muncul ketegangan antarguru karena perbedaan keyakinan di sekolah binaan.',['Memfasilitasi dialog, menegaskan nilai toleransi dan aturan sekolah','Berpihak pada kelompok mayoritas','Menghindari masalah','Menyebarkan isu ke grup pesan'],'A','Pengawas menjadi fasilitator yang menjunjung kebinekaan.']
-].map((q,i)=>({id:'q'+(i+1),g:q[0],sub:q[1],text:q[2],opts:q[3],ans:q[4],exp:q[5]}));
+].map((q,i)=>({id:'q'+(i+1),g:q[0],sub:q[1],text:q[2],opts:q[3],ans:q[4],exp:q[5],pk:'Paket A'}));
+const BR=[
+['Teknis','Supervisi akademik','Guru binaan mengaku kesulitan menerapkan asesmen formatif karena jumlah siswa banyak.',['Menyarankan menghapus asesmen formatif','Mendampingi guru merancang asesmen formatif sederhana (mis. tiket keluar) dan mengamati penerapannya','Meminta guru mengikuti pelatihan sendiri tanpa tindak lanjut','Mengganti dengan ulangan tengah semester saja'],'B','Pendampingan praktis dan tindak lanjut lebih efektif.','Paket B','Sedang'],
+['Teknis','Evaluasi pendidikan','Hasil survei lingkungan belajar menunjukkan indikasi perundungan di sekolah binaan.',['Menganggapnya tidak penting','Menyampaikan temuan kepada kepala sekolah dan mendampingi penyusunan program pencegahan serta pemantauannya','Mengumumkan nama pelaku di forum guru','Menunggu laporan orang tua'],'B','Temuan data harus ditindaklanjuti dengan program dan pemantauan.','Paket B','Sedang'],
+['Teknis','Pembimbingan guru','Kepala sekolah binaan belum memahami penyusunan rencana kerja berbasis rapor pendidikan.',['Menyusunkan seluruh dokumen untuknya','Melatih dan mendampingi kepala sekolah membaca rapor pendidikan lalu menetapkan prioritas perbaikan','Memberi tautan lalu tidak memantau','Menegur karena dianggap lalai'],'B','Pengawas memberdayakan, bukan menggantikan kepala sekolah.','Paket B','Mudah'],
+['Teknis','Pemantauan standar nasional','Standar proses di sekolah binaan tidak terlaksana karena guru sering mengajar tanpa perangkat.',['Memantau, menemukan penyebab, memberi pembinaan, dan menjadwalkan pemantauan lanjutan','Menurunkan tuntutan perangkat','Melaporkan guru langsung ke dinas tanpa pembinaan','Mengabaikan karena perangkat hanya formalitas'],'A','Pemantauan dilanjutkan pembinaan dan evaluasi ulang.','Paket B','Sedang'],
+['Manajerial','Perencanaan program','Anggaran kegiatan kepengawasan dipangkas 30 persen.',['Membatalkan semua kegiatan','Meninjau ulang program, mempertahankan yang berdampak tertinggi, dan memanfaatkan pertemuan daring','Memotong semua kegiatan sama rata','Meminta sekolah membiayai sendiri'],'B','Penyesuaian program berdasar prioritas dampak.','Paket B','Sedang'],
+['Sosial Kultural','Komunikasi lintas budaya','Orang tua di wilayah binaan keberatan dengan jadwal sekolah yang bentrok dengan tradisi setempat.',['Menolak tanpa mendengar','Memfasilitasi musyawarah sekolah dan orang tua untuk mencari penyesuaian jadwal yang tetap memenuhi ketentuan','Membiarkan siswa tidak masuk','Menyalahkan orang tua'],'B','Dialog dan kearifan lokal menjaga kepercayaan.','Paket B','Mudah'],
+['Teknis','Supervisi akademik','Guru enggan diobservasi karena merasa dinilai.',['Memaksa observasi tanpa penjelasan','Menjelaskan tujuan pembinaan, menyepakati fokus observasi bersama, dan memberi umpan balik yang suportif','Membatalkan observasi','Menilai dari laporan teman guru'],'B','Kepercayaan dibangun lewat kesepakatan dan umpan balik suportif.','Paket C','Mudah'],
+['Teknis','Evaluasi pendidikan','Nilai literasi siswa sekolah binaan rendah pada asesmen nasional.',['Menganalisis butir dan kompetensi yang lemah, lalu bersama guru menyusun strategi pembelajaran literasi','Menambah jam pelajaran tanpa analisis','Menyalahkan siswa','Menunggu hasil tahun berikutnya'],'A','Perbaikan literasi harus berbasis analisis data.','Paket C','Sedang'],
+['Teknis','Penelitian dan pengembangan','Pengawas ingin menguji efektivitas model pembelajaran baru di sekolah binaan.',['Langsung menyebarkannya ke semua sekolah','Menguji pada kelas terbatas dengan indikator jelas, mengevaluasi hasil, lalu memperluas bila efektif','Menilai dari kesan guru saja','Meniru hasil riset negara lain tanpa uji'],'B','Uji coba terbatas dan evaluasi menjamin validitas.','Paket C','Sulit'],
+['Teknis','Pembimbingan guru','Seorang guru senior menolak mengikuti pelatihan kurikulum dengan alasan sudah berpengalaman.',['Membiarkan karena senior','Menghargai pengalamannya, menunjukkan kebutuhan pembaruan berdasar data, dan melibatkannya sebagai narasumber berbagi praktik','Mempermalukannya di rapat','Melarangnya mengajar'],'B','Pendekatan menghargai dan melibatkan mendorong perubahan.','Paket C','Sedang'],
+['Manajerial','Pelaporan','Anda menemukan kesalahan data pada laporan yang sudah dikirim ke dinas.',['Mendiamkan agar tidak dipermasalahkan','Segera melapor, mengoreksi data, dan memperbaiki prosedur verifikasi','Menyalahkan operator sekolah','Menghapus laporan lama'],'B','Akuntabilitas: koreksi cepat dan perbaikan sistem.','Paket C','Sedang'],
+['Sosial Kultural','Kerukunan','Siswa dari latar belakang berbeda mengalami diskriminasi dalam kegiatan sekolah.',['Menganggapnya hal biasa','Mendorong sekolah menegakkan aturan antidiskriminasi, mendidik warga sekolah, dan memantau penerapannya','Memindahkan siswa korban','Menunggu laporan resmi'],'B','Sekolah harus inklusif dan aman bagi semua siswa.','Paket C','Mudah']
+].map((q,i)=>({id:'b'+(i+1),g:q[0],sub:q[1],text:q[2],opts:q[3],ans:q[4],exp:q[5],pk:q[6],lv:q[7]}));
 
 let db=load('cat_db',null)||{q:SEED,res:[],set:{dur:120,n:50,wT:70,wM:25,wS:5,exp:true,shuf:true},pass:''};
+function mig(){if(!db.bi){db.q.forEach(q=>{if(!q.pk&&/^q([1-9]|1[0-2])$/.test(q.id))q.pk='Paket A'});db.q=db.q.concat(BR.filter(b=>!db.q.some(q=>q.id===b.id)));db.bi=1;persist()}}
 let S=load('cat_sess',null); let view=S?'exam':'home'; let adm=false,tab='hasil',last=null,timer=null;
 const persist=()=>save('cat_db',db), sess=()=>save('cat_sess',S);
 const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+mig();
 const pks=()=>[...new Set(db.q.map(q=>q.pk).filter(Boolean))].sort();
 const fmt=s=>{s=Math.max(0,s);return [s/3600|0,(s%3600)/60|0,s%60].map(x=>String(x).padStart(2,'0')).join(':')};
 const cat=s=>s>=85?'Sangat Baik':s>=70?'Baik':s>=55?'Cukup':'Perlu Peningkatan';
@@ -132,9 +148,9 @@ function admin(a){
  <div class="row"><button class="p" onclick="alogin()">${db.pass?'Masuk':'Tetapkan & Masuk'}</button><button onclick="view='home';render()">Kembali</button></div></div></div>`;return}
  const tabs=['hasil','soal','pengaturan','cadangan'];let body='';
  if(tab==='hasil')body=`<div class="sc"><table><tr><th>Peserta</th><th>No</th><th>Skor</th><th>Kategori</th><th>Waktu</th></tr>${db.res.map(r=>`<tr><td>${esc(r.p.n)}</td><td>${esc(r.p.no)}</td><td>${r.fin}</td><td>${r.cat}</td><td>${new Date(r.at).toLocaleString('id-ID')}</td></tr>`).join('')||'<tr><td colspan=5 class="mu">Belum ada hasil.</td></tr>'}</table></div><br><button onclick="csv()">Ekspor CSV</button> <button class="d" onclick="if(confirm('Hapus semua hasil?')){db.res=[];persist();render()}">Hapus hasil</button>`;
- if(tab==='soal')body=`<h2>Impor dari Word (.docx)</h2><p class="mu">Format yang dibaca: butir "Soal N." dengan opsi A sampai D, tabel Kunci Jawaban (No, Kunci, Kelompok, Kompetensi, Tingkat), dan bagian Pembahasan, seperti Paket A.</p><select id="im"><option value="add">Tambahkan ke bank soal</option><option value="rep">Ganti seluruh bank soal</option></select><input type="file" accept=".docx" onchange="impw(this.files[0])"><div id="imr" class="mu"></div><hr style="border:0;border-top:1px solid var(--bd);margin:18px 0"><h2>Tambah soal</h2><select id="qg">${G.map(g=>`<option>${g}</option>`).join('')}</select><input id="qs" placeholder="Subkompetensi"><input id="qp" placeholder="Paket (mis. Paket A, opsional)"><select id="ql"><option value="">Tingkat kesulitan (opsional)</option><option>Mudah</option><option>Sedang</option><option>Sulit</option></select><textarea id="qt" rows="3" placeholder="Narasi kasus dan pertanyaan"></textarea>
+ if(tab==='soal')body=`<h2>Impor dari Word (.docx)</h2><p class="mu">Format yang dibaca: butir "Soal N." dengan opsi A sampai D, tabel Kunci Jawaban (No, Kunci, Kelompok, Kompetensi, Tingkat), dan bagian Pembahasan, seperti Paket A. Satu berkas boleh berisi beberapa paket jika tiap paket diawali judul "Paket A", "Paket B", dst. Kunci juga bisa ditulis "Kunci: B" di bawah tiap soal.</p><select id="im"><option value="add">Tambahkan ke bank soal</option><option value="rep">Ganti seluruh bank soal</option></select><select id="ipk"><option value="">Masukkan ke paket: sesuai judul berkas / tanya saya</option>${pks().map(p=>`<option>${esc(p)}</option>`).join('')}</select><input type="file" accept=".docx" onchange="impw(this.files[0])"><div id="imr" class="mu"></div><hr style="border:0;border-top:1px solid var(--bd);margin:18px 0"><h2>Tambah soal</h2><select id="qg">${G.map(g=>`<option>${g}</option>`).join('')}</select><input id="qs" placeholder="Subkompetensi"><input id="qp" list="pkl" placeholder="Paket (pilih atau ketik paket baru)"><datalist id="pkl">${pks().map(p=>`<option>${esc(p)}</option>`).join('')}</datalist><select id="ql"><option value="">Tingkat kesulitan (opsional)</option><option>Mudah</option><option>Sedang</option><option>Sulit</option></select><textarea id="qt" rows="3" placeholder="Narasi kasus dan pertanyaan"></textarea>
  ${'ABCD'.split('').map(l=>`<input id="o${l}" placeholder="Opsi ${l}">`).join('')}<select id="qa"><option>A</option><option>B</option><option>C</option><option>D</option></select><textarea id="qe" rows="2" placeholder="Pembahasan"></textarea><button class="p" onclick="addq()">Simpan soal</button>
- <h2 style="margin-top:20px">Bank soal (${db.q.length})</h2><div class="sc"><table>${db.q.map(q=>`<tr><td>${esc(q.g)}</td><td>${esc(q.pk||'-')} · ${esc(q.lv||'-')}</td><td>${esc(q.text.slice(0,60))}…</td><td>${q.ans}</td><td><button class="d" onclick="delq('${q.id}')">Hapus</button></td></tr>`).join('')}</table></div>`;
+ <h2 style="margin-top:20px">Bank soal (${db.q.length})</h2><p class="mu">${pks().map(p=>esc(p)+': '+db.q.filter(q=>q.pk===p).length).join(' · ')||'Belum ada paket'}</p><div class="sc"><table>${db.q.map(q=>`<tr><td>${esc(q.g)}</td><td>${esc(q.pk||'-')} · ${esc(q.lv||'-')}</td><td>${esc(q.text.slice(0,60))}…</td><td>${q.ans}</td><td><button class="d" onclick="delq('${q.id}')">Hapus</button></td></tr>`).join('')}</table></div>`;
  if(tab==='pengaturan'){const s=db.set;body=`<label>Durasi (menit)<input id="s1" type="number" value="${s.dur}"></label><label>Jumlah soal per ujian<input id="s2" type="number" value="${s.n}"></label>
  <label>Bobot Teknis (%)<input id="s3" type="number" value="${s.wT}"></label><label>Bobot Manajerial (%)<input id="s4" type="number" value="${s.wM}"></label><label>Bobot Sosial Kultural (%)<input id="s5" type="number" value="${s.wS}"></label>
  <label><input type="checkbox" id="s6" ${s.exp?'checked':''} style="width:auto"> Tampilkan pembahasan</label><label><input type="checkbox" id="s7" ${s.shuf?'checked':''} style="width:auto"> Acak soal</label>
@@ -146,27 +162,30 @@ function admin(a){
 function alogin(){const p=$('#pw').value;if(!db.pass){if(p.length<8)return alert('Minimal 8 karakter.');db.pass=btoa(unescape(encodeURIComponent(p)));persist();adm=true}
  else if(btoa(unescape(encodeURIComponent(p)))===db.pass)adm=true;else return alert('Password salah.');render()}
 const h2t=h=>h.replace(/<br\s*\/?>/g,'\n').replace(/<\/(p|td|th|tr|li|h\d)>/g,'\n').replace(/<[^>]+>/g,'').replace(/&nbsp;/g,' ').replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&quot;/g,'"').replace(/&#39;/g,"'").replace(/&amp;/g,'&');
+function numLists(html){const d=new DOMParser().parseFromString(html,'text/html');
+ d.querySelectorAll('ol').forEach(ol=>{let dep=0,p=ol.parentElement;while(p){if(p.tagName==='OL')dep++;p=p.parentElement}let i=1;
+  [...ol.children].forEach(li=>{if(li.tagName!=='LI')return;const f=li.firstElementChild&&li.firstElementChild.tagName==='P'?li.firstElementChild:li;
+   if(!/^\s*(\(?[A-Ea-e]|\d+)[.)]\s/.test(li.textContent))f.insertBefore(d.createTextNode((dep?String.fromCharCode(64+Math.min(i,26)):i)+'. '),f.firstChild);i++})});
+ return d.body.innerHTML}
 function parseDocx(text){
- const L=text.split(/\r?\n/).map(s=>s.trim()).filter(Boolean);
+ const L=text.split(/\r?\n/).map(s=>s.trim()).filter(Boolean).flatMap(l=>/^A[.)]\s.*\sB[.)]\s/.test(l)?l.replace(/\s+([B-E])[.)]\s+/g,'\n$1. ').split('\n'):[l]);
  const idx=(re,from=0)=>{for(let i=from;i<L.length;i++)if(re.test(L[i]))return i;return -1};
- const kS=idx(/^(\d+\.\s*)?Kunci Jawaban/i),eS=idx(/^(\d+\.\s*)?Pembahasan/i),lS=idx(/^(\d+\.\s*)?Lembar Jawaban/i),kiS=idx(/^(\d+\.\s*)?Kisi[- ]?Kisi/i);
+ const kS=idx(/^(?:[\dIVXA-Z]{1,4}[.)]\s*)?Kunci\s+Jawaban/i),eS=idx(/^(?:[\dIVX]{1,4}[.)]\s*)?Pembahasan(?:\s+(?:Soal|Jawaban))?\s*$/i),lS=idx(/^(\d+\.\s*)?Lembar Jawaban/i),kiS=idx(/^(\d+\.\s*)?Kisi[- ]?Kisi/i);
  const qE=[lS,kS].filter(x=>x>0).sort((a,b)=>a-b)[0]??L.length;
  const qs=[];let cur=null,lo=null,m;
  for(const l of L.slice(0,qE)){
-  if((m=l.match(/^(?:Soal\s+)?(\d+)[.)]\s*(.*)/))&&+m[1]===qs.length+1&&(qs.length||!/^[A-D]\.\s/.test(l))){cur={n:+m[1],text:m[2],opts:{}};lo=null;qs.push(cur)}
-  else if(cur&&(m=l.match(/^([A-D])[.)]\s*(.*)/))){cur.opts[m[1]]=m[2];lo=m[1]}
-  else if(cur){if(lo)cur.opts[lo]+=' '+l;else cur.text+=' '+l}
+  if((m=l.match(/^(?:Soal\s*)?(\d+)\s*[.)]\s*(.*)/i))&&(!cur||Object.keys(cur.opts).length>=2||+m[1]===cur.n+1||+m[1]===1)){cur={n:+m[1],text:m[2],opts:{}};lo=null;qs.push(cur)}
+  else if(cur&&(m=l.match(/^\(?([A-Ea-e])[.)]\s*(.*)/))){lo=m[1].toUpperCase();cur.opts[lo]=m[2]}
+  else if(cur&&(m=l.match(/^(?:Kunci|Jawaban)(?:\s+Jawaban)?\s*[:=]\s*\(?([A-Ea-e])\b/i)))cur.k=m[1].toUpperCase();
+  else if(cur&&(m=l.match(/^Pembahasan\s*[:=]\s*(.*)/i))){cur.ex=m[1];lo='x'}
+  else if(cur){if(lo==='x')cur.ex+=' '+l;else if(lo)cur.opts[lo]+=' '+l;else cur.text+=' '+l}
  }
  const key={};
- if(kS>=0){
-  const end=[eS,idx(/^Catatan/i,kS)].filter(x=>x>kS).sort((a,b)=>a-b)[0]??L.length;
-  let i=kS;while(i<end&&!/^\d+$/.test(L[i]))i++;
-  const hdr=L.slice(kS,i).map(x=>x.toLowerCase());
-  const hasMeta=hdr.some(x=>/kelompok|kompetensi/.test(x));
-  for(;i<end;i++)if(/^\d+$/.test(L[i])&&/^[A-D]$/.test(L[i+1]||'')){
-   if(hasMeta)key[+L[i]]={a:L[i+1],g:L[i+2]||'',c:L[i+3]||'',lv:L[i+4]||''};
-   else key[+L[i]]={a:L[i+1],r:(L[i+2]&&!/^\d+$/.test(L[i+2]))?L[i+2]:''}}
- }
+ if(kS>=0){const end=[eS,idx(/^Catatan/i,kS)].filter(x=>x>kS).sort((a,b)=>a-b)[0]??L.length;
+  const hasMeta=L.slice(kS,Math.min(kS+12,end)).some(x=>/kelompok|kompetensi/i.test(x));
+  for(let i=kS;i<end;i++){const l=L[i];let k2;
+   if((k2=l.match(/^(\d+)\s*[.):\-–]?\s*([A-Ea-e])[.)]?(?:\s+(.*))?$/)))key[+k2[1]]={a:k2[2].toUpperCase(),r:k2[3]||''};
+   else if(/^\d+$/.test(l)&&/^[A-Ea-e][.)]?$/.test(L[i+1]||'')){const a=L[i+1][0].toUpperCase();key[+l]=hasMeta?{a,g:L[i+2]||'',c:L[i+3]||'',lv:L[i+4]||''}:{a,r:(L[i+2]&&!/^\d+$/.test(L[i+2]))?L[i+2]:''}}}}
  const kisi={};
  if(kiS>=0){const end=[kS,idx(/^\d+[.)]\s/,kiS)-1].filter(x=>x>kiS).sort((a,b)=>a-b)[0]??L.length;
   for(let i=kiS;i<end;i++)if(/^\d+$/.test(L[i])&&/^(Teknis|Manajerial|Sosial)/i.test(L[i+1]||'')){
@@ -174,26 +193,35 @@ function parseDocx(text){
    const cg=cells.length&&/^C[1-6]$/i.test(cells[cells.length-1])?cells.pop().toUpperCase():'';
    kisi[+L[i]]={g:L[i+1],c:cells[0]||'',mt:cells[1]||'',cg}}}
  const ex={};let en=null;
- if(eS>=0)for(const l of L.slice(eS+1)){if(m=l.match(/^Soal\s+(\d+)\s*\(([A-D])\)\.\s*(.*)/)){en=+m[1];ex[en]=m[3]}else if(en&&!/^Catatan:/.test(l))ex[en]+=' '+l}
+ if(eS>=0)for(const l of L.slice(eS+1)){if(m=l.match(/^Soal\s+(\d+)\s*\(([A-E])\)\.?\s*(.*)/i)){en=+m[1];ex[en]=m[3]}else if(en&&!/^Catatan:/.test(l))ex[en]+=' '+l}
  const grp=g=>/manajer/i.test(g)?'Manajerial':/sosial/i.test(g)?'Sosial Kultural':'Teknis';
  const lvOf=c=>/^C[12]$/.test(c)?'Mudah':c==='C3'?'Sedang':/^C[456]$/.test(c)?'Sulit':'';
- const items=[],warn=[];
- qs.forEach(q=>{const k=key[q.n],ki=kisi[q.n]||{};
+ const items=[],warn=[];let found=0;
+ qs.forEach(q=>{if(!Object.keys(q.opts).length)return;found++;const k=q.k?{...(key[q.n]||{}),a:q.k}:key[q.n],ki=kisi[q.n]||{};
   if(!['A','B','C','D'].every(x=>q.opts[x]))return warn.push('Soal '+q.n+': opsi A-D tidak lengkap');
   if(!k)return warn.push('Soal '+q.n+': kunci jawaban tidak ditemukan');
+  if(!/^[A-D]$/.test(k.a))return warn.push('Soal '+q.n+': kunci '+k.a+' tidak didukung (hanya A-D)');
   const g=grp(k.g||ki.g||''),sub=k.c||[ki.c,ki.mt].filter(Boolean).join(' – ')||'-';
-  items.push({id:'w'+Date.now()+'_'+q.n,g,sub,text:q.text,opts:['A','B','C','D'].map(x=>q.opts[x]),ans:k.a,exp:ex[q.n]||k.r||'-',lv:k.lv||lvOf(ki.cg)})});
- return{items,warn};
+  items.push({g,sub,text:q.text,opts:['A','B','C','D'].map(x=>q.opts[x]),ans:k.a,exp:q.ex||ex[q.n]||k.r||'-',lv:k.lv||lvOf(ki.cg)})});
+ return{items,warn,found};
 }
+function parseMulti(text){const L=text.split(/\r?\n/),hs=[];
+ L.forEach((l,i)=>{const m=l.trim().match(/^(?:SOAL\s+)?PAKET\s+([A-Z])\s*$/i);if(m)hs.push([i,'Paket '+m[1].toUpperCase()])});
+ if(new Set(hs.map(h=>h[1])).size<2)return[{pk:hs[0]?hs[0][1]:'',...parseDocx(text)}];
+ return hs.map((h,k)=>({pk:h[1],...parseDocx(L.slice(h[0],hs[k+1]?hs[k+1][0]:L.length).join('\n'))}))}
 async function impw(f){const o=$('#imr');if(!f)return;
  if(!window.mammoth){o.textContent='Pustaka pembaca Word gagal dimuat. Periksa koneksi internet.';return}
- try{const r=await mammoth.convertToHtml({arrayBuffer:await f.arrayBuffer()});const {items,warn}=parseDocx(h2t(r.value));
-  if(!items.length){o.textContent='Tidak ada soal yang terbaca. '+warn.join('; ');return}
+ try{const r=await mammoth.convertToHtml({arrayBuffer:await f.arrayBuffer()});const parts=parseMulti(h2t(numLists(r.value)));
+  const multi=parts.length>1;let one='';
+  if(!multi){const mm=f.name.match(/Paket[ _]*([A-F])/i);one=$('#ipk').value||parts[0].pk||(prompt('Nama paket untuk soal ini (mis. Paket A):',mm?'Paket '+mm[1].toUpperCase():'')||'').trim()}
+  const items=[],warn=[];let found=0;
+  parts.forEach(p=>{const pk=multi?p.pk:one;found+=p.found;p.items.forEach(i=>{i.pk=pk;i.id='w'+Date.now()+'_'+items.length;items.push(i)});p.warn.forEach(w=>warn.push((multi?pk+' – ':'')+w))});
+  o.innerHTML=found+' butir terdeteksi, '+items.length+' valid.'+(warn.length?'<br>Dilewati:<br>'+warn.map(esc).join('<br>'):'');
+  if(!items.length)return;
   const rep=$('#im').value==='rep';
-  const mm=f.name.match(/Paket[ _]*([A-F])/i);const pk=(prompt('Nama paket untuk soal ini (mis. Paket A):',mm?'Paket '+mm[1].toUpperCase():'')||'').trim();items.forEach(i=>i.pk=pk);
-  if(!confirm(items.length+' soal terbaca ('+G.map(g=>g+' '+items.filter(i=>i.g===g).length).join(', ')+'). '+(rep?'Bank soal lama akan DIGANTI.':'Soal ditambahkan ke bank soal.')+(warn.length?' Dilewati: '+warn.length+' soal.':'')+' Lanjutkan?')){o.textContent='Dibatalkan.';return}
-  db.q=rep?items:db.q.concat(items);persist();render();alert(items.length+' soal berhasil diimpor.'+(warn.length?'\n'+warn.join('\n'):''));
- }catch(e){o.textContent='Gagal membaca berkas Word. Pastikan formatnya .docx.'}}
+  if(!confirm(items.length+' dari '+found+' butir terbaca ('+G.map(g=>g+' '+items.filter(i=>i.g===g).length).join(', ')+'). '+(rep?'Bank soal lama akan DIGANTI.':'Soal ditambahkan ke bank soal.')+(warn.length?' Dilewati: '+warn.length+' soal.':'')+' Lanjutkan?'))return;
+  db.q=rep?items:db.q.concat(items);persist();const w=warn.slice(0,15).join('\n');render();alert(items.length+' soal berhasil diimpor.'+(w?'\n'+w:''));
+ }catch(e){o.textContent='Gagal membaca berkas Word: '+(e&&e.message||e)}}
 function addq(){const g=$('#qg').value,t=$('#qt').value.trim(),o=['A','B','C','D'].map(l=>$('#o'+l).value.trim());
  if(t.length<10||o.some(x=>x.length<2))return alert('Lengkapi narasi dan keempat opsi.');
  db.q.push({id:'q'+Date.now(),g,sub:$('#qs').value.trim()||'-',text:t,opts:o,ans:$('#qa').value,exp:$('#qe').value.trim()||'-',pk:$('#qp').value.trim(),lv:$('#ql').value});persist();render()}
